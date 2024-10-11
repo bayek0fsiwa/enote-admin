@@ -35,7 +35,7 @@ const LoginPage = () => {
           <Button className="w-full">Sign in</Button>
           <div className="mt-0 text-center text-sm">
             Don't have an account?{' '}
-            <Link to={"/register"} className="underline">
+            <Link to={"/auth/register"} className="underline">
               Sign Up
             </Link>
           </div>
