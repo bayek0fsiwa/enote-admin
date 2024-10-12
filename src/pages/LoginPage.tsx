@@ -27,9 +27,9 @@ const LoginPage = () => {
     onSuccess: () => {
       navigate("/dashboard/home");
     },
-    onError: () => {
-      navigate("/auth/login");
-    }
+    // onError: () => {
+    //   alert("Invalid data")
+    // }
   })
 
   const handleLogin = () => {
@@ -49,7 +49,8 @@ const LoginPage = () => {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your email and password below to login to your account.
+            Enter your email and password below to login to your account.<br />
+            {mutation.isError && <span className="text-red-500 text-sm">{mutation.error.message}</span>}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -63,7 +64,6 @@ const LoginPage = () => {
           </div>
         </CardContent>
         <CardFooter>
-
           <Button onClick={handleLogin} className="w-full" disabled={mutation.isPending}>
             {mutation.isPending && <LoaderPinwheel className="animate-spin" />}
             <span className="ml-1">Sign in</span>
