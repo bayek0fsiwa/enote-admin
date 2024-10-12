@@ -11,15 +11,29 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { useRef } from "react"
+import { useMutation } from "@tanstack/react-query"
+import { login } from "@/http/api"
 
 const LoginPage = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: () => {
+      console.log("logged in!?");
+    },
+  })
+
   const handleLogin = () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-    console.log(email, password);
+
+    if (!email || !password) {
+      return alert("Email and Password require")
+    }
+    
+    mutation.mutate({ email, password })
   }
 
   return (
