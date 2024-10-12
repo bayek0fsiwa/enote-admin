@@ -9,20 +9,27 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useRef } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { login } from "@/http/api"
+import { LoaderPinwheel } from "lucide-react"
 
 const LoginPage = () => {
+
+  const navigate = useNavigate();
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: () => {
-      console.log("logged in!?");
+      navigate("/dashboard/home");
     },
+    onError: () => {
+      navigate("/auth/login");
+    }
   })
 
   const handleLogin = () => {
@@ -32,7 +39,7 @@ const LoginPage = () => {
     if (!email || !password) {
       return alert("Email and Password require")
     }
-    
+
     mutation.mutate({ email, password })
   }
 
@@ -56,7 +63,11 @@ const LoginPage = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleLogin} className="w-full">Sign in</Button>
+
+          <Button onClick={handleLogin} className="w-full" disabled={mutation.isPending}>
+            {mutation.isPending && <LoaderPinwheel className="animate-spin" />}
+            <span className="ml-1">Sign in</span>
+          </Button>
           <div className="mt-0 text-center text-sm">
             Don't have an account?{' '}
             <Link to={"/auth/register"} className="underline">
