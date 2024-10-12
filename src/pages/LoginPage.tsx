@@ -27,9 +27,6 @@ const LoginPage = () => {
     onSuccess: () => {
       navigate("/dashboard/home");
     },
-    // onError: () => {
-    //   alert("Invalid data")
-    // }
   })
 
   const handleLogin = () => {
