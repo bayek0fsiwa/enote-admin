@@ -21,10 +21,14 @@ import useTokenStore from "@/store"
 
 
 const DashboardLayout = () => {
-    const token = useTokenStore(state => state.token)
+    const { token, setToken } = useTokenStore(state => state)
 
     if (token === "") {
         return <Navigate to={"/auth/login"} replace />
+    }
+
+    const logout = () => {
+        setToken("")
     }
 
     return (
@@ -83,10 +87,9 @@ const DashboardLayout = () => {
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Settings</DropdownMenuItem>
-                            <DropdownMenuItem>Support</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Button variant={"ghost"} onClick={logout}>Logout</Button>
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>
