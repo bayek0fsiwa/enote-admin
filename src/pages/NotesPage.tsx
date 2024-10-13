@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { MoreHorizontal } from "lucide-react"
+import { MoreHorizontal, CirclePlus } from "lucide-react"
 import { Note } from "@/types"
 
 const NotesPage = () => {
@@ -43,19 +43,27 @@ const NotesPage = () => {
 
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink>
-              <Link to={"/dashboard/home"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Notes</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <div className="flex items-center justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink>
+                <Link to={"/dashboard/home"}>Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Notes</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <Link to={"/dashboard/notes/create"}>
+          <Button>
+            <CirclePlus size={20} />
+            <span className="ml-2">Add Note</span>
+          </Button>
+        </Link>
+      </div>
 
       <CardContent className="mt-5">
         <Table>

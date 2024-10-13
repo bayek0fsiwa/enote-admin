@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
 import DashboardLayout from "./layouts/DashboardLayout";
-import NotesPage from "./pages/NotesPage";
 import AuthLayout from "./layouts/AuthLayout";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import NotesPage from "./pages/NotesPage";
+import CreateNote from "./pages/CreateNote";
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "notes",
                 element: <NotesPage />,
+            },
+            {
+                path: "notes/create",
+                element: <CreateNote />,
             },
         ],
     },
