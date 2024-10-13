@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Navigate, Outlet } from "react-router-dom"
 import {
     CircleUser,
     Home,
@@ -17,12 +17,16 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import useTokenStore from "@/store"
 
-
-export const description =
-    "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action."
 
 const DashboardLayout = () => {
+    const token = useTokenStore(state => state.token)
+
+    if (token === "") {
+        return <Navigate to={"/auth/login"} replace />
+    }
+
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-muted/40 md:block">
@@ -34,7 +38,7 @@ const DashboardLayout = () => {
                         </Link>
                         <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
                         </Button>
-                    </div> 
+                    </div>
                     <div className="flex-1">
                         <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
                             <Link
